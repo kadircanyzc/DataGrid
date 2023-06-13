@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Projeyi İndirmek İçin
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Github'da koldarı görüntülediğiniz sayfa üzerinden indirme işlemini gerçekleştirebilirsiniz.
+Yöntem 1:
+Code --> açılan pencerede HTTPS şeçili iken URL'yi kopyalayın. --> komut satırını açın. --> git clone URL (URL kısmına kopyaladığınız
+URL'yi yapıştırın)
+Yöntem 2:
+Code --> Download ZIP --> ZIP dosyasını ayıklayın.
 
-## Available Scripts
+# Kodları Görüntülemek İçin
 
-In the project directory, you can run:
+İndirilen klasöre sağ tıklayıp komut satırını açın. Açılan komut satırna " code . " komutunu yazın.
 
-### `npm start`
+## Kullanılabilir Komut Dosyaları
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Projeyi çalıştırmak için dizininde şunları çalıştırabilirsiniz:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Uygulamayı Başlatmak İçin
 
-### `npm test`
+`npm run start` komutunu çalıştırın.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##
 
-### `npm run build`
+Bu projede kullanıcın ekranlar arasında geçiş yapabilmesi, verilerini saklayabilmesi, verilerini istediği gibi aratabilmesi, verilerini filtreleyebilmesi amaçlanmıştır.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Bu projede bir DataGrid uygulaması yapılması amaçlandı. Uygulama içerisinde ekranlar arası geçiş için ve logonun yerleştirilmesi için Navbar eklendi. Navbar’ın altına ise bir DataGrid tablosu eklendi. Bu DataGrid tablosuna veri eklemek için yeni hesap ekle butonu, eklenen verileri aramak için arama paneli ve verileri filtrelemek için filtre butonu eklendi
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 1 – Projenin Oluşturulması:
 
-### `npm run eject`
+Create React App, React ile yeni proje oluşturuldu: npx create-react-app rast-mobile
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 2 – Proje İçin Gerekli Kurulumların Yapılması:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Material UI Kurulumu: npm install @mui/material @emotion/react @emotion/styled
+DevExtreme Kurulumu: npx -p devextreme-cli devextreme add devextreme-react
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 3 – Navbar Yapımı:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Navbar yapımında Material UI kullanıldı. Sayfaya entegre edilen Navbar üzerinde düzeltmeler yapılarak istenilen tasarım elde edildi.
 
-## Learn More
+## 4 – DataGrid Yapımı:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Projede DataGrid yapımında DevExtreme kullanıldı. DevExtreme entegre edildi ve üzerinde gerekli düzenlemeler yapıldı. DevExtreme tarafından sağlanan arama paneli ve satır ekleme kullanılmadı. Üzerinde tasarım düzenlemesi yapılamadığı için arama paneli ve satır ekleme butonu sonradan eklendi. Satır ekleme butonu ‘localStorage’ ile kullanıldı. Böylelikle eklenen satırlar yerelde kaydedilebilir oldu. Kaydedilen bilgiler uygulama yüklendiğinde tekrardan listelenebilir.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 4 – Arama Paneli ve Satır Ekleme Butonu Yapımı:
 
-### Code Splitting
+Arama paneli ve satır ekleme butonu yapımında Material UI kullanıldı. Butona basıldığında açılan ekranın sağlanması için Marerial UI Dialog kullanıldı. İstenilen görünüm için css kodları yazıldı.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 5 – Component’lere Bölünmesi:
 
-### Analyzing the Bundle Size
+Dosyaların Bölünmesi ve sınıflandırılması için component yapısı kullanıldı. Dosyaların kolayca ayırt edilebileceği şekilde sınıflandırıldı ve isimlendirildi.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 6 – Responsive Kodlama İşlemi:
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Proje Css dosyalarına yazılan kodlar ile birlikte tüm cihazlara duyarlı hale getirildi. Responsive için Css media özelliği kullanıldı. Media kullanılarak verilen piksel aralıklarına göre responsive işlevi gerçekleştirildi.
