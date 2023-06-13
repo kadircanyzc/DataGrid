@@ -1,11 +1,11 @@
-import Datagrid from './components/Datagrid/Datagrid';
-import Navbar from './components/Navbar/Navbar';
+import Datagrid from "./components/Datagrid/Datagrid";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <div className="App">
-     <Navbar/>
-     <Datagrid/>
+      <Navbar />
+      <Datagrid />
     </div>
   );
 }

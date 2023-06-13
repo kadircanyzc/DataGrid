@@ -1,114 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import DataGrid, {
-  Column, Editing, ValidationRule, Button, Toolbar, Item, Scrolling,
-} from 'devextreme-react/data-grid';
-import SelectBox from 'devextreme-react/select-box';
-import Guid from 'devextreme/core/guid';
-import { dataSource } from './Data.js';
-import "../Styles/Datagrid.scss";
-
-
-
-const newRowPositionOptions = ['first', 'last', 'pageTop', 'pageBottom', 'viewportTop', 'viewportBottom'];
-const scrollingModeOptions = ['standard', 'virtual'];
-
+  Column,
+  Paging,
+  HeaderFilter,
+} from "devextreme-react/data-grid";
+import { Pager } from "devextreme-react/tree-list";
+import "devextreme-react/text-area";
+import SearchBar from "../ToolBox/SearchBar";
+import DialogBar from "../ToolBox/DialogBar";
+import "../../Styles/Datagrid.css";
+import "devextreme/dist/css/dx.light.css";
+import { Box } from "@mui/material";
+import { employees } from "../Datagrid/Data";
+const defaultPageSize = [5, 10, 20];
 
 export default function Datagrid() {
-  const [newRowPosition, setNewRowPosition] = React.useState('viewportTop');
-  const [scrollingMode, setScrollingMode] = React.useState('standard');
-  const [changes, setChanges] = React.useState([]);
-  const [editRowKey, setEditRowKey] = React.useState(null);
+  const [dataSource, setDataSource] = useState([]);
+  const [dataJsData, setDataJsData] = useState([]);
 
-  const onAddButtonClick = React.useCallback((e) => {
-    const key = new Guid().toString();
-    setChanges([{
-      key,
-      type: 'insert',
-      insertAfterKey: e.row.key,
-    }]);
-    setEditRowKey(key);
-  }, []);
+  const addNewData = (data) => {
+    setDataSource((prevState) => {
+      const newList = [...prevState, data];
+      localStorage.setItem("datasource", JSON.stringify(newList));
+      return newList;
+    });
+  };
 
-  const isAddButtonVisible = React.useCallback(({ row }) => !row.isEditing, []);
-
-  const onRowInserted = React.useCallback((e) => {
-    e.component.navigateToRow(e.key);
+  useEffect(() => {
+    if (localStorage.getItem("datasource")) {
+      setDataSource(JSON.parse(localStorage.getItem("datasource")));
+    }
+    setDataJsData(employees);
   }, []);
 
   return (
-    <React.Fragment>
-    <DataGrid
-      id='gridContainer'
-      dataSource={dataSource}
-      showBorders={true}
-      columnAutoWidth={true}
-      remoteOperations={true}
-      onRowInserted={onRowInserted}
-    >
-      <Scrolling
-        mode={scrollingMode}
-      />
-      
-      <Editing
-        mode='row'
-        allowAdding={true}
-        allowDeleting={true}
-        allowUpdating={true}
-        confirmDelete={false}
-        useIcons={true}
-        newRowPosition={newRowPosition}
-        changes={changes}
-        onChangesChange={setChanges}
-        editRowKey={editRowKey}
-        onEditRowKeyChange={setEditRowKey}
-      />
-
-      <Column dataField='OrderID' allowEditing={false} />
-      <Column dataField='OrderDate' dataType='date'>
-        <ValidationRule type='required' />
-      </Column>
-      <Column dataField='ShipName' />
-      <Column dataField='ShipCity' />
-      <Column dataField='ShipPostalCode' />
-      <Column dataField='ShipCountry' />
-      <Column type='buttons'>
-        <Button icon='add'
-          onClick={onAddButtonClick}
-          visible={isAddButtonVisible}
+    <div className="DataGridDiv">
+      <Box sx={{ display: "flex" }}>
+        <SearchBar />
+        <DialogBar addNewData={addNewData} />
+      </Box>
+      <DataGrid
+        rowAlternationEnabled
+        id="gridContainer"
+        dataSource={[...dataJsData, ...dataSource]}
+        keyExpr="ID"
+        showBorders={true}
+        className="DataGrid"
+      >
+        <Paging enabled={true} defaultPageSize={6} />
+        <Pager
+          visible={true}
+          showPageSizeSelector={true}
+          defaultPageSize={defaultPageSize}
+          showNavigationButtons={true}
+          displayMode={"compact"}
         />
-        <Button name='delete' />
-        <Button name='save' />
-        <Button name='cancel' />
-      </Column>
+        <HeaderFilter visible={true} />
 
-      <Toolbar>
-        <Item name='addRowButton' showText='always' />
-      </Toolbar>
-    </DataGrid>
-
-    <div className='options'>
-      <div className='caption'>Options</div>
-      <div className='option-container'>
-        <div className='option'>
-          <span>New Row Position</span>
-          <SelectBox
-            id='newRowPositionSelectBox'
-            value={newRowPosition}
-            items={newRowPositionOptions}
-            onValueChange={setNewRowPosition}
-          />
-        </div>
-        <div className='option'>
-          <span>Scrolling Mode</span>
-          <SelectBox
-            id='scrollingModeSelectBox'
-            value={scrollingMode}
-            items={scrollingModeOptions}
-            onValueChange={setScrollingMode}
-          />
-        </div>
-      </div>
+        <Column dataField="link" />
+        <Column dataField="name" />
+        <Column dataField="description" />
+      </DataGrid>
     </div>
-  </React.Fragment>
-  )
+  );
 }

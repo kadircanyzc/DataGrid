@@ -1,0 +1,51 @@
+.DialogBar_Box {
+  padding-top: 30px;
+  padding-left: 420px;
+  padding-bottom: 10px;
+  height: 42px;
+  @media (max-width: 1921px) {
+    width: 200px;
+    padding-left: 510px;
+  }
+  @media (max-width: 1550px) {
+    width: 200px;
+    padding-left: 540px;
+  }
+  @media (max-width: 1400px) {
+    width: 200px;
+  }
+  @media (max-width: 1304px) {
+    width: 300px;
+    padding-left: 600px;
+  }
+  @media (max-width: 1280px) {
+    width: 300px;
+    padding-left: 590px;
+  }
+  @media (max-width: 1076px) {
+    width: 300px;
+    padding-left: 465px;
+  }
+  @media (max-width: 1024px) {
+    width: 300px;
+    padding-left: 465px;
+  }
+  @media (max-width: 930px) {
+    width: 250px;
+    padding-left: 290px;
+  }
+  @media (max-width: 820px) {
+    width: 250px;
+    padding-left: 250px;
+  }
+  @media (max-width: 540px) {
+    padding-left: 25px;
+  }
+  @media (max-width: 450px) {
+    padding-left: 12px;
+  }
+  @media (max-width: 380px) {
+    width: 250px;
+    padding-left: 1px;
+  }
+}
